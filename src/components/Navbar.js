@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 
 function Navbar(props) {
+  const auth = useAuth();
   const buckets = {
     main: Array.isArray(props.bucketMain) ? props.bucketMain : []
   };
@@ -52,14 +54,22 @@ function Navbar(props) {
                   </a>
                 </li>
               </ul>
-              <div className="ms-auto">
-                <a className="btn btn-outline-primary me-2" href="#/login">
-                  Log In
-                </a>
-                <a className="btn btn-primary" href="#">
-                  Sign Up
-                </a>
-              </div>
+              {auth ? (
+                <div className="ms-auto">
+                  <a className="btn btn-outline-primary me-2" href="#">
+                    Log Out
+                  </a>
+                </div>
+              ) : (
+                <div className="ms-auto">
+                  <a className="btn btn-outline-primary me-2" href="#/login">
+                    Log In
+                  </a>
+                  <a className="btn btn-primary" href="#">
+                    Sign Up
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </nav>
