@@ -1,11 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 
 function Navbar(props) {
   const auth = useAuth();
+  const history = useHistory();
   const buckets = {
     main: Array.isArray(props.bucketMain) ? props.bucketMain : []
+  };
+  const handleLogOut = () => {
+    auth.logout();
+    history.push("/login");
   };
 
   return (
@@ -54,11 +59,14 @@ function Navbar(props) {
                   </a>
                 </li>
               </ul>
-              {auth ? (
+              {auth !== null ? (
                 <div className="ms-auto">
-                  <a className="btn btn-outline-primary me-2" href="#">
+                  <button
+                    className="btn btn-outline-primary me-2"
+                    onClick={handleLogOut}
+                  >
                     Log Out
-                  </a>
+                  </button>
                 </div>
               ) : (
                 <div className="ms-auto">
