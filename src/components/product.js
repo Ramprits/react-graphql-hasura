@@ -33,8 +33,7 @@ function Product({ items, loading }) {
                     </a>
                   </h4>
                   <p className="text-muted lh-lg">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    luctus eget justo et iaculis.
+                    {p.description.substr(0, 50).concat("...")}
                   </p>
                 </div>
               ))}
